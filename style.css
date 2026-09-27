@@ -923,7 +923,7 @@ h2 i,
   padding-right: 20px;
 }
 
-/* Bottom FAQ Text (Firmly Layout - No artificial beige card) */
+/* Bottom FAQ Text */
 .process-faq-wrapper {
   margin-top: auto;
   padding-top: 140px;
@@ -1002,7 +1002,7 @@ h2 i,
   color: var(--color-primary-hover);
 }
 
-/* Feature List (Firmly 4-Step Process on Right) */
+/* Feature List */
 .feature-list-wrapper {
   --space-between: 20px;
   --icon-size: 72px;
@@ -1264,7 +1264,7 @@ h2 i,
 
 
 /* ==========================================================================
-   7. TESTIMONIALS SECTION (Firmly Exact Split-Card Clone)
+   7. TESTIMONIALS SECTION
    ========================================================================== */
 .testimonials-section {
   background-color: #ffffff;
@@ -2443,7 +2443,7 @@ h2 i,
   margin-bottom: 0.5rem;
 }
 
-/* Our Story, Purpose & Stats (Firmly Blueprint) */
+/* Our Story, Purpose & Stats */
 .story-section {
   background-color: #ffffff;
   padding: 120px 0;
@@ -2755,9 +2755,9 @@ h2 i,
 
 /* Light Team Section */
 /* ==========================================================================
-   Firmly-Exact: Team Section (guten-FnMY7T Blueprint)
+   Team Section
    ========================================================================== */
-.team-section-firmly {
+.team-section-grid {
   background-color: #f7f7f7;
   padding: 120px 0;
   position: relative;
@@ -2771,14 +2771,14 @@ h2 i,
   padding-right: 20px;
 }
 
-.team-section-firmly .team-grid {
+.team-section-grid .team-grid {
   display: grid;
   grid-template-columns: 420px 1fr;
   align-items: center;
   gap: 30px;
 }
 
-.team-section-firmly .team-intro {
+.team-section-grid .team-intro {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -2814,7 +2814,7 @@ h2 i,
   color: #1d150b;
 }
 
-.team-section-firmly .team-desc {
+.team-section-grid .team-desc {
   font-family: var(--font-sans);
   font-size: 15px;
   font-weight: 300;
@@ -2823,7 +2823,7 @@ h2 i,
   margin-bottom: 0;
 }
 
-.btn-firmly-team {
+.btn-team-link {
   margin-top: 40px;
   display: inline-flex;
   align-items: center;
@@ -2841,18 +2841,18 @@ h2 i,
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-firmly-team:hover {
+.btn-team-link:hover {
   background-color: #ad8042;
   transform: translateY(-2px);
   color: #ffffff;
 }
 
-.btn-firmly-team i {
+.btn-team-link i {
   font-size: 14px;
   transition: transform 0.3s ease;
 }
 
-.btn-firmly-team:hover i {
+.btn-team-link:hover i {
   transform: translateX(4px);
 }
 
@@ -3109,16 +3109,16 @@ h2 i,
     height: 480px;
   }
 
-  .team-section-firmly {
+  .team-section-grid {
     padding: 80px 0;
   }
 
-  .team-section-firmly .team-grid {
+  .team-section-grid .team-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
 
-  .team-section-firmly .team-intro {
+  .team-section-grid .team-intro {
     max-width: 600px;
   }
 
@@ -3186,7 +3186,7 @@ h2 i,
     height: 400px;
   }
 
-  .team-section-firmly {
+  .team-section-grid {
     padding: 60px 0 80px;
   }
 
