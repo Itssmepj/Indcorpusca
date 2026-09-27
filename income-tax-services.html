@@ -550,10 +550,10 @@
                   <span class="author-role">Technology Firm Director</span>
                 </div>
                 <div class="testimonial-controls">
-                  <button class="testimonial-arrow-btn prev-btn" id="prevTestimonial" aria-label="Previous Testimonial">
+                  <button type="button" class="testimonial-arrow-btn prev-btn" aria-label="Previous Testimonial">
                     <i class="fa-solid fa-chevron-left"></i>
                   </button>
-                  <button class="testimonial-arrow-btn next-btn" id="nextTestimonial" aria-label="Next Testimonial">
+                  <button type="button" class="testimonial-arrow-btn next-btn" aria-label="Next Testimonial">
                     <i class="fa-solid fa-chevron-right"></i>
                   </button>
                 </div>
@@ -571,10 +571,10 @@
                   <span class="author-role">Private Investor &amp; Trader</span>
                 </div>
                 <div class="testimonial-controls">
-                  <button class="testimonial-arrow-btn prev-btn" aria-label="Previous Testimonial">
+                  <button type="button" class="testimonial-arrow-btn prev-btn" aria-label="Previous Testimonial">
                     <i class="fa-solid fa-chevron-left"></i>
                   </button>
-                  <button class="testimonial-arrow-btn next-btn" aria-label="Next Testimonial">
+                  <button type="button" class="testimonial-arrow-btn next-btn" aria-label="Next Testimonial">
                     <i class="fa-solid fa-chevron-right"></i>
                   </button>
                 </div>
@@ -592,10 +592,10 @@
                   <span class="author-role">Creative Agency Owner</span>
                 </div>
                 <div class="testimonial-controls">
-                  <button class="testimonial-arrow-btn prev-btn" aria-label="Previous Testimonial">
+                  <button type="button" class="testimonial-arrow-btn prev-btn" aria-label="Previous Testimonial">
                     <i class="fa-solid fa-chevron-left"></i>
                   </button>
-                  <button class="testimonial-arrow-btn next-btn" aria-label="Next Testimonial">
+                  <button type="button" class="testimonial-arrow-btn next-btn" aria-label="Next Testimonial">
                     <i class="fa-solid fa-chevron-right"></i>
                   </button>
                 </div>
@@ -613,10 +613,10 @@
                   <span class="author-role">NRI Professional</span>
                 </div>
                 <div class="testimonial-controls">
-                  <button class="testimonial-arrow-btn prev-btn" aria-label="Previous Testimonial">
+                  <button type="button" class="testimonial-arrow-btn prev-btn" aria-label="Previous Testimonial">
                     <i class="fa-solid fa-chevron-left"></i>
                   </button>
-                  <button class="testimonial-arrow-btn next-btn" aria-label="Next Testimonial">
+                  <button type="button" class="testimonial-arrow-btn next-btn" aria-label="Next Testimonial">
                     <i class="fa-solid fa-chevron-right"></i>
                   </button>
                 </div>
@@ -851,28 +851,71 @@
       });
     });
 
-    const slides = document.querySelectorAll('.testimonial-slide');
-    const prevBtn = document.getElementById('prevTestimonial');
-    const nextBtn = document.getElementById('nextTestimonial');
-    let currentIndex = 0;
+    // Testimonials Carousel Logic
+    (function initTestimonialsCarousel() {
+      const testimonialsSection = document.querySelector('.testimonials-section');
+      if (!testimonialsSection) return;
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
-      });
-    }
+      const slides = testimonialsSection.querySelectorAll('.testimonial-slide');
+      if (slides.length <= 1) return;
 
-    if (prevBtn && nextBtn && slides.length > 0) {
-      prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
-        showSlide(currentIndex);
+      let currentIndex = 0;
+      slides.forEach((slide, idx) => {
+        if (slide.classList.contains('active')) currentIndex = idx;
       });
 
-      nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
-        showSlide(currentIndex);
+      function showSlide(index) {
+        currentIndex = (index + slides.length) % slides.length;
+        slides.forEach((slide, idx) => {
+          slide.classList.toggle('active', idx === currentIndex);
+        });
+      }
+
+      testimonialsSection.addEventListener('click', (e) => {
+        const prevBtn = e.target.closest('.prev-btn, #prevTestimonial');
+        const nextBtn = e.target.closest('.next-btn, #nextTestimonial');
+
+        if (prevBtn) {
+          e.preventDefault();
+          showSlide(currentIndex - 1);
+        } else if (nextBtn) {
+          e.preventDefault();
+          showSlide(currentIndex + 1);
+        }
       });
-    }
+
+      // Keyboard arrow navigation
+      testimonialsSection.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          showSlide(currentIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          showSlide(currentIndex + 1);
+        }
+      });
+
+      // Mobile swipe gesture support
+      let startX = 0;
+      testimonialsSection.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches.length > 0) {
+          startX = e.touches[0].clientX;
+        }
+      }, { passive: true });
+
+      testimonialsSection.addEventListener('touchend', (e) => {
+        if (e.changedTouches && e.changedTouches.length > 0) {
+          const diffX = startX - e.changedTouches[0].clientX;
+          if (Math.abs(diffX) > 40) {
+            if (diffX > 0) {
+              showSlide(currentIndex + 1);
+            } else {
+              showSlide(currentIndex - 1);
+            }
+          }
+        }
+      }, { passive: true });
+    })();
   </script>
 
   <!-- Offline file:// link support so local preview continues working without a web server -->
